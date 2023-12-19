@@ -30,6 +30,11 @@ function Nav() {
                 Create Manufacturer
               </NavLink>
             </li>
+            <li>
+              <NavLink className="nav-link" to="/automobiles/">
+                Automobiles
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

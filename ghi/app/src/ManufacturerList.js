@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function ManufacturerList(props) {
+function ManufacturerList() {
   const [manufacturers, setManufacturers] = useState([]);
 
   async function getManufacturers() {
@@ -8,6 +8,7 @@ function ManufacturerList(props) {
     if (response.ok) {
       const { manufacturers } = await response.json();
       setManufacturers(manufacturers);
+      console.log(manufacturers);
     } else {
       console.error("An error occured fetching the data");
     }
