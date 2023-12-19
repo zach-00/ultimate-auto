@@ -26,7 +26,7 @@ function Nav() {
               </NavLink>
             </li>
             <li>
-              <NavLink className="nav-link" to="/manufacturers/new">
+              <NavLink className="nav-link" to="/manufacturers/create">
                 Create a Manufacturer
               </NavLink>
             </li>
