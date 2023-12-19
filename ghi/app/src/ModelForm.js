@@ -28,12 +28,16 @@ function ModelForm() {
 
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/manufacturers/';
-
+      try {
         const response = await fetch(url);
+
         if (response.ok) {
             const data = await response.json();
             setManufacturers(data.manufacturers);
         }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     const handleSubmit =  async (e) => {
@@ -61,6 +65,8 @@ function ModelForm() {
             setModelName('');
             setPictureUrl('');
             setManufacturer('');
+        } else {
+          console.error(response.status);
         }
 
     }
