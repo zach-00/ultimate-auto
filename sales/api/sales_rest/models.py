@@ -26,17 +26,17 @@ class AutoVO(models.Model):
 class Sale(models.Model):
     automobile = models.ForeignKey(
         AutoVO,
-        related_name="automobile",
+        related_name="sales",
         on_delete=models.CASCADE
     )
     salesperson = models.ForeignKey(
         Salesperson,
-        related_name="salesperson",
+        related_name="sales",
         on_delete=models.CASCADE
     )
     customer = models.ForeignKey(
         Customer,
-        related_name="customer",
+        related_name="sales",
         on_delete=models.CASCADE
     )
     price = models.PositiveSmallIntegerField()

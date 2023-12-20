@@ -66,6 +66,7 @@ function AppointmentForm() {
         data.date_time = `${date}T${time}`;
         data.technician = technician;
         data.reason = reason;
+        data.status = "Created";
 
         const fetchOptions = {
             method: 'POST',

@@ -31,6 +31,7 @@ class AppointmentListEncoder(ModelEncoder):
         "technician": TechnicianDetailEncoder()
     }
 
+
 @require_http_methods(["GET", "POST"])
 def api_technicians(request):
     if request.method == "GET":
