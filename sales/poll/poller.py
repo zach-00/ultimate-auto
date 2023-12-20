@@ -22,7 +22,6 @@ def poll(repeat=True):
 
             url = "http://project-beta-inventory-api-1:8000/api/automobiles"
             response = requests.get(url)
-            print(response)
             content = json.loads(response.content)
             for auto in content["autos"]:
                 AutoVO.objects.update_or_create(
