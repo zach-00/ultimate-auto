@@ -22,6 +22,7 @@ function AutomobileList() {
   }, []);
   console.log("automobiles:", automobiles);
 
+
   if (automobiles === undefined) {
     return null;
   }

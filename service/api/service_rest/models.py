@@ -11,7 +11,7 @@ class Technician(models.Model):
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=100)
+    vin = models.CharField(max_length=100, unique=True)
     sold = models.BooleanField(default=False)
 
     def __str__(self):
