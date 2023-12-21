@@ -7,6 +7,12 @@ import AutomobileList from "./AutomobileList";
 import ModelList from "./ModelList";
 import ModelForm from "./ModelForm";
 import AutomobileForm from "./AutomobileForm";
+import SalespersonList from "./Sales/SalespersonList";
+import SalespersonForm from "./Sales/SalespersonForm";
+import CustomerList from "./Sales/CustomerList";
+import CustomerForm from "./Sales/CustomerForm";
+import SalesList from "./Sales/SalesList";
+import SalesForm from "./Sales/SalesForm";
 
 function App() {
   return (
@@ -28,6 +34,18 @@ function App() {
           <Route path="automobiles/">
             <Route index element={<AutomobileList />} />
             <Route path="create/" element={<AutomobileForm />} />
+          </Route>
+          <Route path="salespeople/">
+            <Route index element={<SalespersonList />} />
+            <Route path="add/" element={<SalespersonForm />} />
+          </Route>
+          <Route path="customers/">
+            <Route index element={<CustomerList />} />
+            <Route path="add/" element={<CustomerForm />} />
+          </Route>
+          <Route path="sales/">
+            <Route index element={<SalesList />} />
+            <Route path="add/" element={<SalesForm />} />
           </Route>
         </Routes>
       </div>
