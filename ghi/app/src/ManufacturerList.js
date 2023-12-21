@@ -24,6 +24,7 @@ function ManufacturerList() {
 
   return (
     <>
+    <h1>Manufacturers</h1>
       <table className="table table-striped" id="table" data-classes="table">
         <thead>
           <tr>
