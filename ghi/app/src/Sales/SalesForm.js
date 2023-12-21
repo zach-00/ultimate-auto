@@ -14,6 +14,7 @@ function SalesForm() {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
+      // console.log("data.autos: ", data.autos);
       setAutos(data.autos);
     } else {
       console.error(response.status);
