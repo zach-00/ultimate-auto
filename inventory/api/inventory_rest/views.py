@@ -63,7 +63,7 @@ def api_automobile(request, vin):
             )
         except Automobile.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else: # PUT/EDIT
         try:
             content = json.loads(request.body)
             auto = Automobile.objects.get(vin=vin)
