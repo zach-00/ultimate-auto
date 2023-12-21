@@ -14,8 +14,10 @@ function SalesForm() {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      // console.log("data.autos: ", data.autos);
-      setAutos(data.autos);
+      const filtered = data.autos.filter((auto) => {
+        return auto.sold === false;
+      });
+      setAutos(filtered);
     } else {
       console.error(response.status);
     }
