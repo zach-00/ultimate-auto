@@ -58,6 +58,24 @@ Team:
 
 
     LIST TECHNICIANS: Provides a list of all existing technicians in the database. This request does not require any data input.
+        EXPECTED RESPONSE:
+
+            {
+	"technicians": [
+		{
+			"first_name": "Zach",
+			"last_name": "Walkowiak",
+			"employee_id": "12345",
+			"id": 1
+		},
+		{
+			"first_name": "Victoria",
+			"last_name": "Chiang",
+			"employee_id": "54321",
+			"id": 3
+		}
+    ]
+    }
 
     CREATE TECHNICIAN: This endpoint allows for the creation of a new technician in the database. You must provide a first name, last name, and employee ID.
         EXAMPLE INPUT:
@@ -67,9 +85,30 @@ Team:
                 "employee_id": "12345"
             }
 
+        EXPECTED RESPONSE:
+            {
+                "first_name": "John",
+                "last_name": "Smith",
+                "employee_id": "12345",
+                "id": 4
+            }
+
+
+
     TECHNICIAN DETAILS: This endpoint returns all the details of a specific technician. No data input is required. However, you must specify the technicians ID number in the URL when sending the GET request.
+        EXPECTED REPONSE:
+            {
+                "first_name": "Zach",
+                "last_name": "Walkowiak",
+                "employee_id": 12345,
+                "id": 1
+            }
 
     DELETE TECHNICIAN: Sending a DELETE request to this endpoint will remove the specified technician from the database. No data input is required, however you must specify the technicians ID in the URL.
+        EXPECTED RESPONSE:
+            {
+                "deleted": "true"
+            }
 
 
 
@@ -86,6 +125,39 @@ Team:
 
 
     LIST APPOINTMENTS: Sending a GET request to this endpoint will return a list of all existing appointments in the database. No data input is required.
+        EXPECTED RESPONSE:
+            {
+	"appointments": [
+		{
+			"date_time": "2024-01-10T13:30:00.610386+00:00",
+			"reason": "Windshield Replacement",
+			"status": "Created",
+			"vin": "1C3CC5FB2AN120382",
+			"customer": "James Bond",
+			"id": 3,
+			"technician": {
+				"first_name": "Zach",
+				"last_name": "Walkowiak",
+				"employee_id": "12345",
+				"id": 1
+			}
+		},
+		{
+			"date_time": "2023-12-26T12:00:00+00:00",
+			"reason": "Tire Rotation",
+			"status": "Created",
+			"vin": "1C3CC5FB2AN120339",
+			"customer": "Bill Brown",
+			"id": 6,
+			"technician": {
+				"first_name": "Victoria",
+				"last_name": "Chiang",
+				"employee_id": "54321",
+				"id": 3
+			}
+		}
+    ]
+    }
 
     CREATE APPOINTMENT: Sending a POST request to this endpoint allows you to create an appointment in the database. It will set the status of the appointment to "Created" by defaut upon form submission. This POST request requires a date/time, reason, VIN, customer, and technician for its input. (Status input is required if making the request from an API client like Insomnia).
         EXAMPLE INPUT:
@@ -98,7 +170,27 @@ Team:
                 "technician": "12345"
             }
 
+        EXPECTED RESPONSE:
+            {
+                "date_time": "2024-01-10T13:30:00.610386+00:00",
+                "reason": "Windshiled Replacement",
+                "status": "Created",
+                "vin": "1C3CC5FB2AN120382",
+                "customer": "James Bond",
+                "id": 3,
+                "technician": {
+                    "first_name": "Zach",
+                    "last_name": "Walkowiak",
+                    "employee_id": 12345,
+                    "id": 1
+                }
+            }
+
     DELETE APPOINTMENT: Sending a DELETE request to this endpoint will remove the specified appointment from the database. No data input is required, however you must specify the appointment ID in the URL when making the request.
+        EXPECTED RESPONSE:
+            {
+                "deleted": "true"
+            }
 
     CANCEL APPOINTMENT: Sending a PUT request to this endpoint will set the specified appointment's status to canceled. If making this request through an API client like Insomnia, you must specify the appointment ID in the URL, and you must pass JSON data to update the status to canceled as the data input.
         EXAMPLE INPUT:
@@ -106,10 +198,42 @@ Team:
                 "status": "Canceled"
             }
 
+        EXPECTED RESPONSE:
+            {
+                "date_time": "2023-12-26T12:00:00+00:00",
+                "reason": "Windshield Wiper Replacement",
+                "status": "Canceled",
+                "vin": "1C3CC5FB2AN120339",
+                "customer": "Bill Brown",
+                "id": 6,
+                "technician": {
+                    "first_name": "Victoria",
+                    "last_name": "Chiang",
+                    "employee_id": "54321",
+                    "id": 3
+                }
+            }
+
     FINISH APPOINTMENT: Sending a PUT request to this endpoint will set the specified appointment's status to finished. If making this request through an API client like Insomnia, you must specify the appointment ID in the URL, and you must pass JSON data to update the status to finished as the data input.
         EXAMPLE INPUT:
             {
                 "status": "Finished"
+            }
+
+        EXPECTED RESPONSE:
+            {
+                "date_time": "2023-12-21T16:30:00+00:00",
+                "reason": "Engine Replacement",
+                "status": "Finished",
+                "vin": "1C3CC5FB2AN120174",
+                "customer": "John Smith",
+                "id": 4,
+                "technician": {
+                    "first_name": "Zach",
+                    "last_name": "Walkowiak",
+                    "employee_id": "12345",
+                    "id": 1
+                }
             }
 
 
@@ -126,6 +250,23 @@ Team:
 
 
     LIST SALESPEOPLE: This endpoint will return a list of all existing salespeople in the database. No data input is required.
+        EXPECTED RESPONSE:
+            {
+                "salesperson": [
+                    {
+                        "first_name": "Bill",
+                        "last_name": "Johnson",
+                        "employee_id": "12345",
+                        "id": 1
+                    },
+                    {
+                        "first_name": "Jessica",
+                        "last_name": "Smith",
+                        "employee_id": "98765",
+                        "id": 2
+                    }
+                ]
+            }
 
     CREATE SALESPERSON: This endpoint allows you to create a salesperson to add to the database. The required data input includes a first name, last name, and employee ID.
         EXAMPLE INPUT:
@@ -135,8 +276,19 @@ Team:
                 "employee_id": "12345"
             }
 
-    DELETE SALESPERSON: Sending a DELETE request to this endpoint will remove a specified salesperson from the database. There is no required data input, however you must specify the salesperson's ID in the URL when making the request.
+        EXPECTED RESPONSE:
+            {
+                "first_name": "Bill",
+                "last_name": "Johnson",
+                "employee_id": "12345",
+                "id": 1
+            }
 
+    DELETE SALESPERSON: Sending a DELETE request to this endpoint will remove a specified salesperson from the database. There is no required data input, however you must specify the salesperson's ID in the URL when making the request.
+        EXPECTED RESPONSE:
+            {
+                "deleted": "true"
+            }
 
 
 
@@ -149,6 +301,31 @@ Team:
     Delete customer | DELETE | http://localhost:8090/api/customers/:id/
 
     LIST CUSTOMERS: This endpoint will return a list of all existing customers in the database. No data input is required.
+        EXPECTED RESPONSE:
+            {
+                "customers": [
+                    {
+                        "first_name": "Homer",
+                        "last_name": "Simpson",
+                        "address_street": "123 First St",
+                        "address_city": "Springfield",
+                        "address_state": "MA",
+                        "address_zip": "01020",
+                        "phone": "4135550000",
+                        "id": 1
+                    },
+                    {
+                        "first_name": "Marge",
+                        "last_name": "Simpson",
+                        "address_street": "123 First St",
+                        "address_city": "Springfield",
+                        "address_state": "MA",
+                        "address_zip": "01020",
+                        "phone": "4138885500",
+                        "id": 2
+                    }
+                ]
+            }
 
     CREATE CUSTOMER: This endpoint allows you to create a customer to add to the database. The required data input includes a first name, last name, address, and phone number. When creating a customer using an API client like Insomnia, the address must be broken up into separate inputs to include the street, city, state and zip.
         EXAMPLE INPUT:
@@ -157,13 +334,28 @@ Team:
                 "last_name": "Simpson",
                 "address_street": "123 First St",
                 "address_city": "Springfield",
-                "address_state": "Massachusetts",
+                "address_state": "MA",
                 "address_zip": "01020",
                 "phone": "4135550000"
             }
 
-    DELETE CUSTOMER: Sending a DELETE request to this endpoint will remove a specified customer from the database. There is no required data input, however you must specify the customer's ID in the URL when making the request.
+        EXPECTED RESPONSE:
+            {
+                "first_name": "Homer",
+                "last_name": "Simpson",
+                "address_street": "123 First St",
+                "address_city": "Springfield",
+                "address_state": "MA",
+                "address_zip": "01020",
+                "phone": "4135550000",
+                "id": 1
+            }
 
+    DELETE CUSTOMER: Sending a DELETE request to this endpoint will remove a specified customer from the database. There is no required data input, however you must specify the customer's ID in the URL when making the request.
+        EXPECTED RESPONSE:
+            {
+                "deleted": "true"
+            }
 
 
 
@@ -176,6 +368,57 @@ Team:
     Delete sale | DELETE | http://localhost:8090/api/sales/:id/
 
     LIST SALES: This endpoint will return a list of all existing sales in the database. No data input is required.
+        EXPECTED RESPONSE:
+            {
+                "sales": [
+                    {
+                        "automobile": {
+                            "vin": "1C3CC5FB2AN120382",
+                            "sold": false
+                        },
+                        "salesperson": {
+                            "first_name": "Bill",
+                            "last_name": "Johnson",
+                            "employee_id": "12345",
+                            "id": 1
+                        },
+                        "customer": {
+                            "first_name": "Marge",
+                            "last_name": "Simpson",
+                            "address_street": "123 First St",
+                            "address_city": "Springfield",
+                            "address_state": "MA",
+                            "address_zip": "01020",
+                            "phone": "4138885500",
+                            "id": 2
+                        },
+                        "price": 30500
+                    },
+                    {
+                        "automobile": {
+                            "vin": "1C3CC5FB2AN120339",
+                            "sold": false
+                        },
+                        "salesperson": {
+                            "first_name": "Bill",
+                            "last_name": "Johnson",
+                            "employee_id": "12345",
+                            "id": 1
+                        },
+                        "customer": {
+                            "first_name": "Homer",
+                            "last_name": "Simpson",
+                            "address_street": "123 First St",
+                            "address_city": "Springfield",
+                            "address_state": "MA",
+                            "address_zip": "01020",
+                            "phone": "4138885500",
+                            "id": 1
+                        },
+                        "price": 38000
+                    }
+                ]
+            }
 
     CREATE SALE: This endpoint allows you to create a sale to add to the database. The required data input includes automobile, salesperson, customer and a price. All fields except price are a foreign key, so automobile must be referenced by its VIN, salesperson referenced by their employee ID, and customer must be referenced by their ID.
         EXAMPLE INPUT:
@@ -186,7 +429,36 @@ Team:
                 "price": 30500
             }
 
+        EXPECTED RESPONSE:
+            {
+                "automobile": {
+                    "vin": "1C3CC5FB2AN120382",
+                    "sold": false
+                },
+                "salesperson": {
+                    "first_name": "Bill",
+                    "last_name": "Johnson",
+                    "employee_id": "12345",
+                    "id": 1
+                },
+                "customer": {
+                    "first_name": "Marge",
+                    "last_name": "Simpson",
+                    "address_street": "123 First St",
+                    "address_city": "Springfield",
+                    "address_state": "MA",
+                    "address_zip": "01020",
+                    "phone": "4138885500",
+                    "id": 2
+                },
+                "price": 30500
+            }
+
     DELETE SALE: Sending a DELETE request to this endpoint will remove a specified sale from the database. There is no required data input, however you must specify the sale's ID in the URL when making the request.
+        EXPECTED RESPONSE:
+            {
+                "deleted": "true"
+            }
 
 
 ### Inventory API (Optional)
