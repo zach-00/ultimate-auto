@@ -70,17 +70,20 @@ const handleSubmit = async (e) => {
         }
     };
 
-    const response = await fetch(url, fetchOptions);
-    if (response.ok) {
-        const newAuto = await response.json();
-        console.log(newAuto);
-        setColor('');
-        setYear('');
-        setVin('');
-        setModel('');
-    } else {
-        console.error(response.status);
-    }
+    try {
+        const response = await fetch(url, fetchOptions);
+        if (response.ok) {
+            const newAuto = await response.json();
+            console.log(newAuto);
+            setColor('');
+            setYear('');
+            setVin('');
+            setModel('');
+        }
+  } catch (err) {
+    console.error(err);
+  }
+
 }
 
     return (

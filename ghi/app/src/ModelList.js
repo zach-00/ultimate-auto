@@ -6,11 +6,14 @@ function ModelList() {
 
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/models/';
-
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setModels(data.models);
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                setModels(data.models);
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 

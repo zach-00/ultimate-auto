@@ -7,10 +7,14 @@ function AppointmentList() {
     const fetchAppointments = async() => {
         const url = 'http://localhost:8080/api/appointments/';
 
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setAppointments(data.appointments);
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                setAppointments(data.appointments);
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
@@ -33,11 +37,15 @@ function AppointmentList() {
                 'Content-Type': 'application/json'
             }
         };
-        const response = await fetch(url, fetchOptions);
-        if (response.ok) {
-            const canceledAppt = await response.json();
-            console.log(canceledAppt);
-            fetchAppointments();
+        try {
+            const response = await fetch(url, fetchOptions);
+            if (response.ok) {
+                const canceledAppt = await response.json();
+                console.log(canceledAppt);
+                fetchAppointments();
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
@@ -56,12 +64,15 @@ function AppointmentList() {
                 'Content-Type': 'application/json'
             }
         };
-
-        const response = await fetch(url, fetchOptions);
-        if (response.ok) {
-            const finishedAppt = await response.json();
-            console.log(finishedAppt);
-            fetchAppointments();
+        try {
+            const response = await fetch(url, fetchOptions);
+            if (response.ok) {
+                const finishedAppt = await response.json();
+                console.log(finishedAppt);
+                fetchAppointments();
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 

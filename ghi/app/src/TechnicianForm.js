@@ -39,15 +39,18 @@ function TechnicianForm() {
                 'Content-Type': 'application/json'
             }
         };
-
-        const response = await fetch(url, fetchOptions);
-        if (response.ok) {
-            const technician = await response.json();
-            console.log(technician);
-            setFirstName('');
-            setLastName('');
-            setEmployeeId('');
-        }
+        try {
+          const response = await fetch(url, fetchOptions);
+          if (response.ok) {
+              const technician = await response.json();
+              console.log(technician);
+              setFirstName('');
+              setLastName('');
+              setEmployeeId('');
+          }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
 

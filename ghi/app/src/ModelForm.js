@@ -58,16 +58,18 @@ function ModelForm() {
             }
         };
 
-        const response = await fetch(url, fetchOptions);
-        if (response.ok) {
-            const newModel = await response.json();
-            console.log(newModel);
-            setModelName('');
-            setPictureUrl('');
-            setManufacturer('');
-        } else {
-          console.error(response.status);
-        }
+        try {
+            const response = await fetch(url, fetchOptions);
+            if (response.ok) {
+                const newModel = await response.json();
+                console.log(newModel);
+                setModelName('');
+                setPictureUrl('');
+                setManufacturer('');
+            }
+      } catch (err) {
+        console.error(err);
+      }
 
     }
 

@@ -10,18 +10,20 @@ function ServiceHistory() {
 
     const fetchAppointments = async () => {
         const url = 'http://localhost:8080/api/appointments/';
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setAppointments(data.appointments);
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                setAppointments(data.appointments);
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
     useEffect(() => {
         fetchAppointments();
     }, []);
-
-
 
 
     return (

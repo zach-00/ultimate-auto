@@ -43,10 +43,14 @@ function AppointmentForm() {
 
     const fetchTechnicians = async () => {
         const url = 'http://localhost:8080/api/technicians/';
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setTechnicians(data.technicians);
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                setTechnicians(data.technicians);
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
@@ -76,16 +80,20 @@ function AppointmentForm() {
             }
         };
 
-        const response = await fetch(url, fetchOptions);
-        if (response.ok) {
-            const appointment = await response.json();
-            console.log(appointment);
-            setVin('');
-            setCustomer('');
-            setDate('');
-            setTime('');
-            setTechnician('');
-            setReason('');
+        try {
+            const response = await fetch(url, fetchOptions);
+            if (response.ok) {
+                const appointment = await response.json();
+                console.log(appointment);
+                setVin('');
+                setCustomer('');
+                setDate('');
+                setTime('');
+                setTechnician('');
+                setReason('');
+            }
+        } catch (err) {
+            console.error(err);
         }
 
     }

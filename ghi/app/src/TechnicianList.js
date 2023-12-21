@@ -6,10 +6,14 @@ function TechnicianList() {
 
     const fetchTechnicians = async () => {
         const url = 'http://localhost:8080/api/technicians/';
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setTechnicians(data.technicians);
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                setTechnicians(data.technicians);
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
@@ -21,16 +25,19 @@ function TechnicianList() {
     const handleDelete = async (e) => {
         const id = e.target.value;
         const url = `http://localhost:8080/api/technicians/${id}`;
+        try {
+            const fetchOptions = {
+                method: 'DELETE'
+            };
 
-        const fetchOptions = {
-            method: 'DELETE'
-        };
-
-        const response = await fetch(url, fetchOptions);
-        if (response.ok) {
-            const confirmation = await response.json();
-            console.log(confirmation);
-            fetchTechnicians();
+            const response = await fetch(url, fetchOptions);
+            if (response.ok) {
+                const confirmation = await response.json();
+                console.log(confirmation);
+                fetchTechnicians();
+            }
+        } catch (err) {
+            console.error(err);
         }
 
     }
