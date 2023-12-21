@@ -66,6 +66,12 @@ def api_salespeople_list(request):
             safe=False,
         )
 
+@require_http_methods(["DELETE"])
+def api_salesperson(request, id):
+    count, _ = Salesperson.objects.filter(id=id).delete()
+    return JsonResponse({"deleted": count > 0})
+
+
 @require_http_methods(["GET", "POST"])
 def api_customer_list(request):
     if request.method == "GET":
@@ -74,7 +80,7 @@ def api_customer_list(request):
             {"customers": customers},
             encoder=CustomerEncoder
         )
-    else:
+    else: # POST
         content = json.loads(request.body)
         customer = Customer.objects.create(**content)
         return JsonResponse(
@@ -82,6 +88,12 @@ def api_customer_list(request):
             encoder=CustomerEncoder,
             safe=False,
         )
+
+@require_http_methods(["DELETE"])
+def api_customer(request, id):
+    count, _ = Customer.objects.filter(id=id).delete()
+    return JsonResponse({"deleted": count > 0})
+
 
 @require_http_methods(["GET", "POST"])
 def api_sales_list(request):
@@ -128,3 +140,9 @@ def api_sales_list(request):
             encoder=SaleEncoder,
             safe=False
         )
+
+
+@require_http_methods(["DELETE"])
+def api_sale(request, id):
+    count, _ = Sale.objects.filter(id=id).delete()
+    return JsonResponse({"deleted": count > 0})
