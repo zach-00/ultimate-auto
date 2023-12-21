@@ -4,7 +4,11 @@ from .models import Salesperson, Customer, AutoVO, Sale
 # Register your models here.
 @admin.register(Salesperson)
 class SalespersonAdmin(admin.ModelAdmin):
-    pass
+        list_display = [
+        "first_name",
+        "last_name",
+        "full_name"
+    ]
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):

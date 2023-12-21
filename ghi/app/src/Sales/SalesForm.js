@@ -174,7 +174,7 @@ function SalesForm() {
                   onChange={handlePriceChange}
                   placeholder="price"
                   required
-                  type="text"
+                  type="number"
                   value={price}
                   name="price"
                   id="price"

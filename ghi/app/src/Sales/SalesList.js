@@ -31,7 +31,7 @@ function SalesList() {
         <input
           className="form-control me-2"
           type="search"
-          placeholder="Search by Salesperson"
+          placeholder="Search by Salesperson ID"
           aria-label="Search"
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -53,13 +53,9 @@ function SalesList() {
         <tbody>
           {sales
             .filter((sale) => {
-              return search.toLowerCase() === ""
+              return search === ""
                 ? sale
-                : sale.salesperson.first_name
-                    .toLowerCase()
-                    .includes(search)
-                    .toLowerCase()
-                    .includes(search);
+                : sale.salesperson.employee_id.includes(search);
             })
             .map((sale) => {
               return (
