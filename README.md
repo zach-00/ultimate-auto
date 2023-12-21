@@ -4,31 +4,37 @@ CarCar is an application built to help car dealerships manage their inventory, s
 ​
 Team:
 ​
-* Zach - Service
-* Victoria - Sales
-​
-## How to Run this App
- - Put instructions to build and run this app here
 
- 1. Fork and clone repository to your local machine:
-    git clone <<respositoryURL>>
+- Zach - Service
+- Victoria - Sales
+  ​
+
+## How to Run this App
+
+- Put instructions to build and run this app here
+
+1. Fork and clone repository to your local machine:
+   git clone <<respositoryURL>>
 
 2. Run the following commands in your terminal to create a volume, build an image, and run containers:
-    docker volume create <<volume-name>>
-    docker-compose build
-    docker-compose up
+   docker volume create <<volume-name>>
+   docker-compose build
+   docker-compose up
 
 3. Open browser to http://localhost:3000/
 
 ## Design
 
     CarCar is a microservices application made up of three separate services which communicate with one another via pollers. It integrates data and information application-wide to create a fully functional and efficient dealership data-management platform. The three microservices are Service, Sales, and Inventory.
-​
-## Diagram
- - Put diagram here
 
+​
+
+## Diagram
+
+Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79f42a6436b9d8f24fde5fe1d03
 
 ## Service microservice
+
     Explain your models and integration with the inventory
     microservice, here.
 
@@ -36,18 +42,20 @@ Team:
 
     There is a poller set up which communicates with the inventory service to create value objects based off of inventory objects stored in the database. This allows the service microservice to have a reference for automobiles that have have been sold, giving those customers VIP status when creating a service appointment.
 
-
-
 ## Sales microservice
 
     Explain your models and integration with the inventory
     microservice, here.
 
-​
+​ The sales application tracks salespeople (employees), customers, and the car sales that have been made. A poller syncs automobile data to an AutoVO object in the sales app from the inventory.
+
+Cars available to be sold are tracked through a sold flag. Only unsold cars are displayed on the sales form. After a sale has been made and a record of sale has been submitted through the sales form, the automobile's sold status is updated in the inventory app, where it is subsequently synced via polling in Sales and Service.
+
 ## API Documentation, URLs and Ports
+
 ### Service API
-​
-    ### Technicians
+
+​ ### Technicians
 
     Action | Method | URL
 
@@ -61,19 +69,19 @@ Team:
         EXPECTED RESPONSE:
 
             {
-	"technicians": [
-		{
-			"first_name": "Zach",
-			"last_name": "Walkowiak",
-			"employee_id": "12345",
-			"id": 1
-		},
-		{
-			"first_name": "Victoria",
-			"last_name": "Chiang",
-			"employee_id": "54321",
-			"id": 3
-		}
+    "technicians": [
+    	{
+    		"first_name": "Zach",
+    		"last_name": "Walkowiak",
+    		"employee_id": "12345",
+    		"id": 1
+    	},
+    	{
+    		"first_name": "Victoria",
+    		"last_name": "Chiang",
+    		"employee_id": "54321",
+    		"id": 3
+    	}
     ]
     }
 
@@ -127,35 +135,35 @@ Team:
     LIST APPOINTMENTS: Sending a GET request to this endpoint will return a list of all existing appointments in the database. No data input is required.
         EXPECTED RESPONSE:
             {
-	"appointments": [
-		{
-			"date_time": "2024-01-10T13:30:00.610386+00:00",
-			"reason": "Windshield Replacement",
-			"status": "Created",
-			"vin": "1C3CC5FB2AN120382",
-			"customer": "James Bond",
-			"id": 3,
-			"technician": {
-				"first_name": "Zach",
-				"last_name": "Walkowiak",
-				"employee_id": "12345",
-				"id": 1
-			}
-		},
-		{
-			"date_time": "2023-12-26T12:00:00+00:00",
-			"reason": "Tire Rotation",
-			"status": "Created",
-			"vin": "1C3CC5FB2AN120339",
-			"customer": "Bill Brown",
-			"id": 6,
-			"technician": {
-				"first_name": "Victoria",
-				"last_name": "Chiang",
-				"employee_id": "54321",
-				"id": 3
-			}
-		}
+    "appointments": [
+    	{
+    		"date_time": "2024-01-10T13:30:00.610386+00:00",
+    		"reason": "Windshield Replacement",
+    		"status": "Created",
+    		"vin": "1C3CC5FB2AN120382",
+    		"customer": "James Bond",
+    		"id": 3,
+    		"technician": {
+    			"first_name": "Zach",
+    			"last_name": "Walkowiak",
+    			"employee_id": "12345",
+    			"id": 1
+    		}
+    	},
+    	{
+    		"date_time": "2023-12-26T12:00:00+00:00",
+    		"reason": "Tire Rotation",
+    		"status": "Created",
+    		"vin": "1C3CC5FB2AN120339",
+    		"customer": "Bill Brown",
+    		"id": 6,
+    		"technician": {
+    			"first_name": "Victoria",
+    			"last_name": "Chiang",
+    			"employee_id": "54321",
+    			"id": 3
+    		}
+    	}
     ]
     }
 
@@ -236,13 +244,12 @@ Team:
                 }
             }
 
-
-
 ### Sales API
 
     ### Salespeople
+
 ​
-    Action | Method | URL
+Action | Method | URL
 
     List salespeople | GET | http://localhost:8090/api/salespeople/
     Create salesperson | POST | http://localhost:8090/api/salespeople/
@@ -460,15 +467,15 @@ Team:
                 "deleted": "true"
             }
 
-
 ### Inventory API (Optional)
- - Put Inventory API documentation here. This is optional if you have time, otherwise prioritize the other services.
-​
 
-
-​
+- Put Inventory API documentation here. This is optional if you have time, otherwise prioritize the other services.
+  ​
 
 ​
+
+​
+
 ## Value Objects
 
-    Both the Service Microservice and the Sales Microservice have one value object each, which is an AutomobileVO object.
+    Both the Service Microservice and the Sales Microservice have one value object each: the AutomobileVO object in Service, and the AutoVO object in Sales. They both store a VIN number and sold status.
