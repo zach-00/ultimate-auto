@@ -37,6 +37,8 @@ function TechnicianList() {
 
 
     return (
+        <>
+        <h1>Technicians</h1>
         <table className="table table-striped table-hover">
             <thead>
                 <tr>
@@ -60,6 +62,7 @@ function TechnicianList() {
 
             </tbody>
         </table>
+        </>
     );
 }
 

@@ -66,6 +66,10 @@ function AppointmentList() {
     }
 
     return (
+        <>
+        <div className="container margin-bottom">
+            <h1>Service Appointments</h1>
+        </div>
         <table className="table table-striped table-hover">
             <thead>
                 <tr>
@@ -86,7 +90,7 @@ function AppointmentList() {
                     return (
                 <tr key={appointment.id}>
                     <td>{appointment.vin}</td>
-                    <td>Yes</td>
+                    <td>??????</td>
                     <td>{appointment.customer}</td>
                     <td>{appointment.date_time.slice(0, 10)}</td>
                     <td>{appointment.date_time.slice(11, 16)}</td>
@@ -103,6 +107,7 @@ function AppointmentList() {
 
             </tbody>
         </table>
+        </>
     );
 }
 
