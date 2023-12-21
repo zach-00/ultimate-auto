@@ -45,7 +45,7 @@ function AutomobileList() {
                 <td>{auto.model.name}</td>
                 <td>{auto.year}</td>
                 <td>{auto.color}</td>
-                <td>{auto.sold}</td>
+                <td>{auto.sold ? "Sold" : "Available"}</td>
               </tr>
             );
           })}

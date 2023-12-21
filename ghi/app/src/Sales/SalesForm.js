@@ -9,6 +9,17 @@ function SalesForm() {
   const [salesperson, setSalesperson] = useState("");
   const [customer, setCustomer] = useState("");
 
+  const handleSold = async (vin) => {
+    const url = `http://localhost:8100/api/automobiles/${vin}/`;
+    const fetchConfig = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sold: true }),
+    };
+    const soldAuto = await fetch(url, fetchConfig);
+    // console.log("soldAuto: ", soldAuto);
+  };
+
   const fetchAutos = async () => {
     const url = "http://localhost:8100/api/automobiles/";
     const response = await fetch(url);
@@ -62,6 +73,9 @@ function SalesForm() {
     data.customer = customer;
     data.price = price;
 
+    console.log(data);
+    console.log(data.automobile);
+
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -74,6 +88,7 @@ function SalesForm() {
     // console.log(response);
     if (response.ok) {
       const newSale = await response.json();
+      handleSold(data.automobile);
       setAutos("");
       setSalespeople("");
       setCustomers("");
@@ -101,15 +116,6 @@ function SalesForm() {
   const handlePriceChange = (e) => {
     const value = e.target.value;
     setPrice(value);
-  };
-
-  const handleSold = async (vin) => {
-    const url = `http://localhost:8100/api/automobiles/${vin}/`;
-    const fetchConfig = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-    };
-    const soldAuto = await fetch(url, fetchConfig);
   };
 
   return (
@@ -193,12 +199,7 @@ function SalesForm() {
                 />
                 <label htmlFor="price">Price</label>
               </div>
-              <button
-                onClick={() => handleSold(auto.vin)}
-                className="btn btn-primary"
-              >
-                Add
-              </button>
+              <button className="btn btn-primary">Add</button>
             </form>
           </div>
         </div>

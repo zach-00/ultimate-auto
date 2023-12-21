@@ -12,7 +12,7 @@ class SalespersonEncoder(ModelEncoder):
         "first_name",
         "last_name",
         "employee_id",
-        "id",
+        "id"
     ]
 
 class CustomerEncoder(ModelEncoder):
@@ -41,8 +41,7 @@ class SaleEncoder(ModelEncoder):
         "automobile",
         "salesperson",
         "customer",
-        "price",
-        "id"
+        "price"
     ]
     encoders = {
         "automobile": AutoVOEncoder(),
