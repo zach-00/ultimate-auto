@@ -4,6 +4,7 @@ function SalespersonForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [employeeId, setEmployeeId] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +30,7 @@ function SalespersonForm() {
       setFirstName("");
       setLastName("");
       setEmployeeId("");
+      setSubmitted(true);
     } else {
       console.error(response.status);
     }
@@ -48,6 +50,10 @@ function SalespersonForm() {
     const value = e.target.value;
     setEmployeeId(value);
   };
+
+  const submittedMessage = submitted
+    ? "alert alert-success mb-0"
+    : "alert alert-success d-none mb-0";
 
   return (
     <div className="row">
@@ -96,8 +102,9 @@ function SalespersonForm() {
               />
               <label htmlFor="employee_id">Employee ID</label>
             </div>
-            <button className="btn btn-primary">Add</button>
+            <button className="btn btn-primary mb-3">Add</button>
           </form>
+          <div className={submittedMessage}>Success! Salesperson added.</div>
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ function SalesList() {
             })
             .map((sale) => {
               return (
-                <tr key={sale.id}>
+                <tr key={`${sale.id}-${sale.salesperson.employee_id}`}>
                   <td>{sale.salesperson.employee_id}</td>
                   <td>
                     {sale.salesperson.first_name} {sale.salesperson.last_name}

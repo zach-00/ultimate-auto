@@ -8,6 +8,7 @@ function CustomerForm() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
@@ -44,6 +45,10 @@ function CustomerForm() {
     setState(value);
   };
 
+  const submittedMessage = submitted
+    ? "alert alert-success mb-0"
+    : "alert alert-success d-none mb-0";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,13 +70,10 @@ function CustomerForm() {
         "Content-Type": "application/json",
       },
     };
-    console.log(fetchConfig);
 
     const response = await fetch(url, fetchConfig);
-    console.log(response);
     if (response.ok) {
       const newCustomer = await response.json();
-      console.log(newCustomer);
       setFirstName("");
       setLastName("");
       setPhone("");
@@ -79,6 +81,7 @@ function CustomerForm() {
       setCity("");
       setState("");
       setZip("");
+      setSubmitted(true);
     } else {
       console.error(response.status);
     }
@@ -185,8 +188,9 @@ function CustomerForm() {
                 <label htmlFor="zip">ZIP</label>
               </div>
 
-              <button className="btn btn-primary">Add</button>
+              <button className="btn btn-primary mb-3">Add</button>
             </form>
+            <div className={submittedMessage}>Success! Customer added.</div>
           </div>
         </div>
       </div>

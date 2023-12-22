@@ -8,6 +8,7 @@ function SalesForm() {
   const [auto, setAuto] = useState("");
   const [salesperson, setSalesperson] = useState("");
   const [customer, setCustomer] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSold = async (vin) => {
     const url = `http://localhost:8100/api/automobiles/${vin}/`;
@@ -62,6 +63,10 @@ function SalesForm() {
     fetchCustomers();
   }, []);
 
+  const submittedMessage = submitted
+    ? "alert alert-success mb-0"
+    : "alert alert-success d-none mb-0";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -93,6 +98,7 @@ function SalesForm() {
       setSalespeople("");
       setCustomers("");
       setPrice("");
+      setSubmitted(true);
     } else {
       console.error(response.status);
     }
@@ -201,6 +207,7 @@ function SalesForm() {
               </div>
               <button className="btn btn-primary">Add</button>
             </form>
+            <div className={submittedMessage}>Success! Sales added.</div>
           </div>
         </div>
       </div>
