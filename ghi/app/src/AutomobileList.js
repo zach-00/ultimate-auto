@@ -9,9 +9,6 @@ function AutomobileList() {
     if (response.ok) {
       const data = await response.json();
       setAutos(data.autos);
-
-      // console.log("data.autos", data.autos);
-      // console.log("automobiles:", automobiles);
     } else {
       console.error("An error occured fetching the data");
     }
@@ -20,8 +17,6 @@ function AutomobileList() {
   useEffect(() => {
     getAutos();
   }, []);
-  console.log("automobiles:", automobiles);
-
 
   if (automobiles === undefined) {
     return null;
@@ -29,8 +24,8 @@ function AutomobileList() {
 
   return (
     <>
-    <h1>Automobiles</h1>
-      <table className="table table-striped" id="table" data-classes="table">
+      <h1>Automobiles</h1>
+      <table className="table table-striped" id="table">
         <thead>
           <tr>
             <th>VIN</th>
@@ -50,7 +45,7 @@ function AutomobileList() {
                 <td>{auto.model.name}</td>
                 <td>{auto.year}</td>
                 <td>{auto.color}</td>
-                <td>{auto.sold}</td>
+                <td>{auto.sold ? "Sold" : "Available"}</td>
               </tr>
             );
           })}

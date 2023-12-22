@@ -10,8 +10,6 @@ function ManufacturerForm(props) {
       name: name,
     };
 
-    // console.log(data);
-
     const url = "http://localhost:8100/api/manufacturers/";
     const fetchConfig = {
       method: "post",
@@ -22,14 +20,11 @@ function ManufacturerForm(props) {
     };
 
     const response = await fetch(url, fetchConfig);
-    // console.log(response);
 
     if (response.ok) {
       const newManufacturer = await response.json();
-      // console.log(newManufacturer);
 
       setName("");
-      //   console.log(newManufacturer);
     } else {
       console.log("An error occured fetching the data");
     }

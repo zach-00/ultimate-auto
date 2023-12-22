@@ -41,7 +41,8 @@ class SaleEncoder(ModelEncoder):
         "automobile",
         "salesperson",
         "customer",
-        "price"
+        "price",
+        "id"
     ]
     encoders = {
         "automobile": AutoVOEncoder(),
@@ -105,7 +106,6 @@ def api_sales_list(request):
         )
     else:
         content = json.loads(request.body)
-        print(content)
         try:
             vin = content["automobile"]
             automobile = AutoVO.objects.get(vin=vin)

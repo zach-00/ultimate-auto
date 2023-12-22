@@ -8,7 +8,6 @@ function ManufacturerList() {
     if (response.ok) {
       const { manufacturers } = await response.json();
       setManufacturers(manufacturers);
-      console.log(manufacturers);
     } else {
       console.error("An error occured fetching the data");
     }
@@ -24,7 +23,7 @@ function ManufacturerList() {
 
   return (
     <>
-    <h1>Manufacturers</h1>
+      <h1>Manufacturers</h1>
       <table className="table table-striped" id="table" data-classes="table">
         <thead>
           <tr>

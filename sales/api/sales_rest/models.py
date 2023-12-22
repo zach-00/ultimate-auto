@@ -8,7 +8,10 @@ class Salesperson(models.Model):
     employee_id = models.CharField(max_length=8)
 
     def __str__(self):
-        return self.last_name
+        return f"{self.first_name} {self.last_name}"
+
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=200)
@@ -18,6 +21,9 @@ class Customer(models.Model):
     address_state = models.CharField(max_length=2)
     address_zip = models.CharField(max_length=5)
     phone = models.CharField(max_length=13)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class AutoVO(models.Model):
     vin = models.CharField(max_length=17)
