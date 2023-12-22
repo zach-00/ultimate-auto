@@ -90,12 +90,15 @@ function AppointmentForm() {
                 setTime('');
                 setTechnician('');
                 setReason('');
+                setHasSubmitted(true);
             }
         } catch (err) {
             console.error(err);
         }
 
     }
+
+    const successMessage = (!hasSubmitted) ? 'd-none' : 'alert alert-success mb-0';
 
 
 
@@ -188,7 +191,11 @@ function AppointmentForm() {
               <label htmlFor="reason">Reason</label>
             </div>
 
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary mb-3">Create</button>
+
+              <div className={successMessage} >
+                Appointment successfully created!
+              </div>
 
             </form>
           </div>
