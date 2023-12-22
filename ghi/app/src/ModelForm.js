@@ -11,6 +11,8 @@ function ModelForm() {
 
     const [ manufacturer, setManufacturer ] = useState('');
 
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
+
     const handleModelNameChange = (e) => {
         const value = e.target.value;
         setModelName(value);
@@ -62,10 +64,10 @@ function ModelForm() {
             const response = await fetch(url, fetchOptions);
             if (response.ok) {
                 const newModel = await response.json();
-                console.log(newModel);
                 setModelName('');
                 setPictureUrl('');
                 setManufacturer('');
+                setHasSubmitted(true);
             }
       } catch (err) {
         console.error(err);
@@ -77,6 +79,8 @@ function ModelForm() {
         fetchData();
     }, []);
 
+
+    const successMessage = (!hasSubmitted) ? 'd-none' : 'alert alert-success mb-0';
 
     return (
         <div className="row">
@@ -105,7 +109,11 @@ function ModelForm() {
                   })}
               </select>
               </div>
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary mb-3">Create</button>
+
+              <div className={successMessage}>
+                  Model successfully created!
+              </div>
 
             </form>
           </div>

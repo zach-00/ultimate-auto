@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 
 function AutomobileForm() {
-  const [color, setColor] = useState("");
-  const [year, setYear] = useState("");
-  const [vin, setVin] = useState("");
-  const [model, setModel] = useState("");
-  const [models, setModels] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
+
+    const [ color, setColor ] = useState('');
+    const [ year, setYear ] = useState('');
+    const [ vin, setVin ] = useState('');
+    const [ model, setModel ] = useState('');
+    const [ models, setModels ] = useState([]);
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
 
   const handleColorChange = (e) => {
     const value = e.target.value;
@@ -47,9 +48,6 @@ function AutomobileForm() {
     fetchData();
   }, []);
 
-  const submittedMessage = submitted
-    ? "alert alert-success mb-0"
-    : "alert alert-success d-none mb-0";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,19 +69,23 @@ function AutomobileForm() {
     };
 
     try {
-      const response = await fetch(url, fetchOptions);
-      if (response.ok) {
-        const newAuto = await response.json();
-        setColor("");
-        setYear("");
-        setVin("");
-        setModel("");
-        setSubmitted(true);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+        const response = await fetch(url, fetchOptions);
+        if (response.ok) {
+            const newAuto = await response.json();
+            setColor('');
+            setYear('');
+            setVin('');
+            setModel('');
+            setHasSubmitted(true);
+        }
+  } catch (err) {
+    console.error(err);
+  }
+
+}
+
+const successMessage = (!hasSubmitted) ? 'd-none' : 'alert alert-success mb-0';
+
 
   return (
     <div className="row">
@@ -151,14 +153,18 @@ function AutomobileForm() {
                   );
                 })}
               </select>
-            </div>
-            <button className="btn btn-primary mb-3">Create</button>
-          </form>
-          <div className={submittedMessage}>Success! Automobile created.</div>
+              </div>
+              <button className="btn btn-primary mb-3">Create</button>
+
+              <div className={successMessage}>
+                  Automobile successfully created!
+              </div>
+
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default AutomobileForm;

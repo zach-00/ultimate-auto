@@ -5,6 +5,7 @@ function TechnicianForm() {
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
     const [ employeeId, setEmployeeId ] = useState('');
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
 
     const handleFirstNameChange = (e) => {
         const value = e.target.value;
@@ -43,15 +44,17 @@ function TechnicianForm() {
           const response = await fetch(url, fetchOptions);
           if (response.ok) {
               const technician = await response.json();
-              console.log(technician);
               setFirstName('');
               setLastName('');
               setEmployeeId('');
+              setHasSubmitted(true);
           }
       } catch (err) {
         console.error(err);
       }
     }
+
+    const successMessage = (!hasSubmitted) ? 'alert alert-success d-none mb-0' : 'alert alert-success mb-0';
 
 
     return (
@@ -76,9 +79,14 @@ function TechnicianForm() {
                 <label htmlFor="employee_id">Employee ID</label>
               </div>
 
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary mb-3">Create</button>
 
             </form>
+
+            <div className={successMessage} id="success-message">
+                Technician successfully created!
+            </div>
+
           </div>
         </div>
       </div>

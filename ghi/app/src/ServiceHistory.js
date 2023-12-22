@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 function ServiceHistory() {
 
     const [ appointments, setAppointments ] = useState([]);
-
+    const [ autos, setAutos ] = useState([]);
     const [ search, setSearch ] = useState('');
-    console.log(search);
 
     const fetchAppointments = async () => {
         const url = 'http://localhost:8080/api/appointments/';
@@ -21,10 +20,30 @@ function ServiceHistory() {
         }
     }
 
+    const fetchAutos = async () => {
+        const url = 'http://localhost:8100/api/automobiles/';
+        const response = await fetch(url);
+
+        if (response.ok) {
+            const data = await response.json();
+            const soldAutos = data.autos.filter(auto => {
+                return auto.sold;
+            });
+            setAutos(soldAutos);
+        }
+
+    }
+
     useEffect(() => {
         fetchAppointments();
+        fetchAutos();
     }, []);
 
+
+    const vipVins = [];
+    for (let auto of autos) {
+        vipVins.push(auto.vin);
+    }
 
     return (
         <>
@@ -42,9 +61,6 @@ function ServiceHistory() {
             </div>
         </div>
         </form>
-
-
-
 
         <table className="table table-striped table-hover">
             <thead>
@@ -67,7 +83,11 @@ function ServiceHistory() {
                     return (
                 <tr key={appt.id}>
                     <td>{appt.vin}</td>
-                    <td>??????</td>
+
+                    {vipVins.includes(appt.vin)
+                    ? <td>Yes</td>
+                    : <td>No</td>
+                    }
                     <td>{appt.customer}</td>
                     <td>{appt.date_time.slice(0, 10)}</td>
                     <td>{appt.date_time.slice(11, 16)}</td>

@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 
 function AppointmentForm() {
-  const [technicians, setTechnicians] = useState([]);
-  const [technician, setTechnician] = useState("");
-  const [vin, setVin] = useState("");
-  const [customer, setCustomer] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [reason, setReason] = useState("");
+
+    const [ technicians, setTechnicians ] = useState([]);
+    const [ vin, setVin ] = useState('');
+    const [ customer, setCustomer ] = useState('');
+    const [ date, setDate ] = useState('');
+    const [ time, setTime ] = useState('');
+    const [ technician, setTechnician ] = useState('');
+    const [ reason, setReason ] = useState('');
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
 
   const handleVinChange = (e) => {
     const value = e.target.value;
@@ -77,24 +79,27 @@ function AppointmentForm() {
       },
     };
 
-    try {
-      const response = await fetch(url, fetchOptions);
-      if (response.ok) {
-        const appointment = await response.json();
-        console.log(appointment);
-        console.log("Before setting technician:", technician);
-        setVin("");
-        setCustomer("");
-        setDate("");
-        setTime("");
-        setTechnician("");
-        console.log("After setting technician:", technician);
-        setReason("");
-      }
-    } catch (err) {
-      console.error(err);
+        try {
+            const response = await fetch(url, fetchOptions);
+            if (response.ok) {
+                const appointment = await response.json();
+                setVin('');
+                setCustomer('');
+                setDate('');
+                setTime('');
+                setTechnician('');
+                setReason('');
+                setHasSubmitted(true);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
     }
-  };
+
+    const successMessage = (!hasSubmitted) ? 'd-none' : 'alert alert-success mb-0';
+
+
 
   return (
     <div className="row">
@@ -158,12 +163,8 @@ function AppointmentForm() {
               <label htmlFor="time">Time</label>
             </div>
 
-            <div className="margin-bottom">
-              <select
-                onChange={handleTechnicianChange}
-                className="form-select"
-                id="technician"
-              >
+              <div className="margin-bottom">
+                <select onChange={handleTechnicianChange} className="form-select" id="technician">
                 <option value="">Choose a Technician</option>
                 {technicians.map((tech) => {
                   return (
@@ -189,12 +190,17 @@ function AppointmentForm() {
               <label htmlFor="reason">Reason</label>
             </div>
 
-            <button className="btn btn-primary">Create</button>
-          </form>
+              <button className="btn btn-primary mb-3">Create</button>
+
+              <div className={successMessage} >
+                Appointment successfully created!
+              </div>
+
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default AppointmentForm;
