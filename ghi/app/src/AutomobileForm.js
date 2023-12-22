@@ -72,7 +72,6 @@ function AutomobileForm() {
         const response = await fetch(url, fetchOptions);
         if (response.ok) {
             const newAuto = await response.json();
-            console.log(newAuto);
             setColor('');
             setYear('');
             setVin('');

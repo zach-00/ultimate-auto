@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 function AppointmentList() {
 
     const [ appointments, setAppointments ] = useState([]);
+    const [ autos, setAutos ] = useState([]);
     const [ hasFinished, setHasFinished ] = useState(false);
     const [ hasCanceled, setHasCanceled ] = useState(false);
 
@@ -20,9 +21,27 @@ function AppointmentList() {
         }
     }
 
+    const fetchAutos = async () => {
+        const url = 'http://localhost:8100/api/automobiles/';
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            const soldAutos = data.autos.filter(auto => {
+                return auto.sold;
+            })
+            setAutos(soldAutos);
+        }
+    }
+
     useEffect(() => {
         fetchAppointments();
+        fetchAutos();
     }, []);
+
+    const vipVins = [];
+    for (let auto of autos) {
+        vipVins.push(auto.vin);
+    }
 
     const handleCancel = async (e) => {
         const id = e.target.value;
@@ -43,7 +62,6 @@ function AppointmentList() {
             const response = await fetch(url, fetchOptions);
             if (response.ok) {
                 const canceledAppt = await response.json();
-                console.log(canceledAppt);
                 fetchAppointments();
                 setHasCanceled(true);
             }
@@ -71,7 +89,6 @@ function AppointmentList() {
             const response = await fetch(url, fetchOptions);
             if (response.ok) {
                 const finishedAppt = await response.json();
-                console.log(finishedAppt);
                 fetchAppointments();
                 setHasFinished(true);
             }
@@ -108,7 +125,10 @@ function AppointmentList() {
                     return (
                 <tr key={appointment.id}>
                     <td>{appointment.vin}</td>
-                    <td>??????</td>
+                    {vipVins.includes(appointment.vin)
+                    ? <td>Yes</td>
+                    : <td>No</td>
+                    }
                     <td>{appointment.customer}</td>
                     <td>{appointment.date_time.slice(0, 10)}</td>
                     <td>{appointment.date_time.slice(11, 16)}</td>

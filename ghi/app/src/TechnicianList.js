@@ -34,7 +34,6 @@ function TechnicianList() {
             const response = await fetch(url, fetchOptions);
             if (response.ok) {
                 const confirmation = await response.json();
-                console.log(confirmation);
                 fetchTechnicians();
                 setHasDeleted(true);
             }

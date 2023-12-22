@@ -83,7 +83,6 @@ function AppointmentForm() {
             const response = await fetch(url, fetchOptions);
             if (response.ok) {
                 const appointment = await response.json();
-                console.log(appointment);
                 setVin('');
                 setCustomer('');
                 setDate('');
