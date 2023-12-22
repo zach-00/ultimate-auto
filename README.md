@@ -4,17 +4,16 @@ CarCar is an application built to help car dealerships manage their inventory, s
 ​
 Team:
 ​
-
 - Zach - Service
 - Victoria - Sales
   ​
 
 ## How to Run this App
 
-- Put instructions to build and run this app here
+** Required software includes Git, Docker and Node.JS **
 
 1. Fork and clone repository to your local machine:
-   git clone <<respositoryURL>>
+   git clone https://gitlab.com/zach-00/project-beta
 
 2. Run the following commands in your terminal to create a volume, build an image, and run containers:
    docker volume create <<volume-name>>
@@ -35,21 +34,15 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
 
 ## Service microservice
 
-    Explain your models and integration with the inventory
-    microservice, here.
-
     The service microservice provides a way for a dealership to track service appointments, appointment history, technicians, customers, and date-times. This service integrates with inventory and sales to allow the tracking of whether a vehicle has been sold. The service appointments allow tracking based on status, whether it has been created, finished or canceled.
 
     There is a poller set up which communicates with the inventory service to create value objects based off of inventory objects stored in the database. This allows the service microservice to have a reference for automobiles that have have been sold, giving those customers VIP status when creating a service appointment.
 
 ## Sales microservice
 
-    Explain your models and integration with the inventory
-    microservice, here.
+    ​The sales application tracks salespeople (employees), customers, and the car sales that have been made. A poller syncs automobile data to an AutoVO object in the sales app from the inventory.
 
-​ The sales application tracks salespeople (employees), customers, and the car sales that have been made. A poller syncs automobile data to an AutoVO object in the sales app from the inventory.
-
-Cars available to be sold are tracked through a sold flag. Only unsold cars are displayed on the sales form. After a sale has been made and a record of sale has been submitted through the sales form, the automobile's sold status is updated in the inventory app, where it is subsequently synced via polling in Sales and Service.
+    Cars available to be sold are tracked through a sold flag. Only unsold cars are displayed on the sales form. After a sale has been made and a record of sale has been submitted through the sales form, the automobile's sold status is updated in the inventory app, where it is subsequently synced via polling in Sales and Service.
 
 ## API Documentation, URLs and Ports
 
@@ -467,15 +460,7 @@ Action | Method | URL
                 "deleted": "true"
             }
 
-### Inventory API (Optional)
-
-- Put Inventory API documentation here. This is optional if you have time, otherwise prioritize the other services.
   ​
-
-​
-
-​
-
 ## Value Objects
 
     Both the Service Microservice and the Sales Microservice have one value object each: the AutomobileVO object in Service, and the AutoVO object in Sales. They both store a VIN number and sold status.
