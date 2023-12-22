@@ -18,7 +18,6 @@ function SalesForm() {
       body: JSON.stringify({ sold: true }),
     };
     const soldAuto = await fetch(url, fetchConfig);
-    // console.log("soldAuto: ", soldAuto);
   };
 
   const fetchAutos = async () => {
@@ -78,9 +77,6 @@ function SalesForm() {
     data.customer = customer;
     data.price = price;
 
-    console.log(data);
-    console.log(data.automobile);
-
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
@@ -90,13 +86,12 @@ function SalesForm() {
     };
 
     const response = await fetch(url, fetchConfig);
-    // console.log(response);
     if (response.ok) {
       const newSale = await response.json();
       handleSold(data.automobile);
-      setAutos("");
-      setSalespeople("");
-      setCustomers("");
+      setAuto("");
+      setSalesperson("");
+      setCustomer("");
       setPrice("");
       setSubmitted(true);
     } else {
@@ -143,7 +138,7 @@ function SalesForm() {
                   <option>Choose Auto VIN</option>
                   {autos.map((auto) => {
                     return (
-                      <option key={auto.id} value={auto.vin}>
+                      <option key={auto.vin} value={auto.vin}>
                         {auto.vin}
                       </option>
                     );
@@ -205,7 +200,7 @@ function SalesForm() {
                 />
                 <label htmlFor="price">Price</label>
               </div>
-              <button className="btn btn-primary">Add</button>
+              <button className="btn btn-primary mb-3">Add</button>
             </form>
             <div className={submittedMessage}>Success! Sales added.</div>
           </div>
