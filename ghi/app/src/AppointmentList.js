@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 function AppointmentList() {
 
     const [ appointments, setAppointments ] = useState([]);
+    const [ hasFinished, setHasFinished ] = useState(false);
+    const [ hasCanceled, setHasCanceled ] = useState(false);
 
     const fetchAppointments = async() => {
         const url = 'http://localhost:8080/api/appointments/';
@@ -43,6 +45,7 @@ function AppointmentList() {
                 const canceledAppt = await response.json();
                 console.log(canceledAppt);
                 fetchAppointments();
+                setHasCanceled(true);
             }
         } catch (err) {
             console.error(err);
@@ -70,11 +73,15 @@ function AppointmentList() {
                 const finishedAppt = await response.json();
                 console.log(finishedAppt);
                 fetchAppointments();
+                setHasFinished(true);
             }
         } catch (err) {
             console.error(err);
         }
     }
+
+    const finishMessage = (!hasFinished) ? 'd-none' : 'alert alert-success mb-0';
+    const cancelMessage = (!hasCanceled) ? 'd-none' : 'alert alert-warning mb-0';
 
     return (
         <>
@@ -115,6 +122,16 @@ function AppointmentList() {
                     );
                     }
                 })}
+
+                {hasFinished
+                ? <tr><td className={finishMessage} role="alert">Service has been completed!</td></tr>
+                : null
+            }
+
+                {hasCanceled
+                ? <tr><td className={cancelMessage} role="alert">Appointment has been canceled.</td></tr>
+                : null
+            }
 
             </tbody>
         </table>

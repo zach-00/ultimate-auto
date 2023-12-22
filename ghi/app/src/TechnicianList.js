@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 function TechnicianList() {
 
     const [ technicians, setTechnicians ] = useState([]);
+    const [ hasDeleted, setHasDeleted ] = useState(false);
 
     const fetchTechnicians = async () => {
         const url = 'http://localhost:8080/api/technicians/';
@@ -35,6 +36,7 @@ function TechnicianList() {
                 const confirmation = await response.json();
                 console.log(confirmation);
                 fetchTechnicians();
+                setHasDeleted(true);
             }
         } catch (err) {
             console.error(err);
@@ -42,10 +44,26 @@ function TechnicianList() {
 
     }
 
+    const deleteMessage = (!hasDeleted) ? 'd-none' : 'alert alert-danger mb-0 text-center';
 
     return (
         <>
-        <h1>Technicians</h1>
+        <div className="container">
+            <div className="row">
+                <div className="col-sm">
+                    <h1>Technicians</h1>
+                </div>
+                {hasDeleted
+                ? <div className="col-sm">
+                    <div className={deleteMessage}>
+                        Technician has been removed!
+                    </div>
+                </div>
+                 : <div></div>}
+
+
+            </div>
+        </div>
         <table className="table table-striped table-hover">
             <thead>
                 <tr>

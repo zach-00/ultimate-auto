@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 function AppointmentForm() {
 
     const [ technicians, setTechnicians ] = useState([]);
-    const [ technician, setTechnician ] = useState('');
     const [ vin, setVin ] = useState('');
     const [ customer, setCustomer ] = useState('');
     const [ date, setDate ] = useState('');
     const [ time, setTime ] = useState('');
+    const [ technician, setTechnician ] = useState('');
     const [ reason, setReason ] = useState('');
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
 
     const handleVinChange = (e) => {
         const value = e.target.value;
@@ -91,6 +92,7 @@ function AppointmentForm() {
                 setTime('');
                 setTechnician('');
                 setReason('');
+                setHasSubmitted(true);
             }
         } catch (err) {
             console.error(err);
@@ -98,6 +100,7 @@ function AppointmentForm() {
 
     }
 
+    const successMessage = (!hasSubmitted) ? 'd-none' : 'alert alert-success mb-0';
 
 
     return (
@@ -128,7 +131,7 @@ function AppointmentForm() {
               </div>
 
               <div className="margin-bottom">
-                <select onChange={handleTechnicianChange} className="form-select" id="technician">
+                <select onChange={handleTechnicianChange} required className="form-select" value={technician} name="technician" id="technician">
                 <option value="">Choose a Technician</option>
                 {technicians.map(tech => {
                     return (
@@ -143,7 +146,12 @@ function AppointmentForm() {
                 <label htmlFor="reason">Reason</label>
               </div>
 
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary mb-3">Create</button>
+
+              <div className={successMessage}>
+                Appointment successfully created!
+              </div>
+
 
             </form>
           </div>

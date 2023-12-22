@@ -7,6 +7,7 @@ function AutomobileForm() {
     const [ vin, setVin ] = useState('');
     const [ model, setModel ] = useState('');
     const [ models, setModels ] = useState([]);
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
 
     const handleColorChange = (e) => {
         const value = e.target.value;
@@ -79,12 +80,16 @@ const handleSubmit = async (e) => {
             setYear('');
             setVin('');
             setModel('');
+            setHasSubmitted(true);
         }
   } catch (err) {
     console.error(err);
   }
 
 }
+
+
+  const successMessage = (!hasSubmitted) ? 'd-none' : 'alert alert-success mb-0';
 
     return (
         <div className="row">
@@ -118,7 +123,11 @@ const handleSubmit = async (e) => {
                   })}
               </select>
               </div>
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary mb-3">Create</button>
+
+              <div className={successMessage}>
+                  Automobile successfully created!
+              </div>
 
             </form>
           </div>
