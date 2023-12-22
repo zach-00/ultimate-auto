@@ -5,12 +5,14 @@ function SalespersonList() {
 
   const getSalespeople = async () => {
     const url = "http://localhost:8090/api/salespeople/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setSalespeople(data.salesperson);
-    } else {
-      console.error("An error occured fetching the data");
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setSalespeople(data.salesperson);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -6,12 +6,14 @@ function SalesList() {
 
   const getSales = async () => {
     const url = "http://localhost:8090/api/sales/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setSales(data.sales);
-    } else {
-      console.error("An error occured fetching the data");
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setSales(data.sales);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -5,12 +5,14 @@ function AutomobileList() {
 
   const getAutos = async () => {
     const url = "http://localhost:8100/api/automobiles/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setAutos(data.autos);
-    } else {
-      console.error("An error occured fetching the data");
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setAutos(data.autos);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

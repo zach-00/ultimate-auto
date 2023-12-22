@@ -17,42 +17,52 @@ function SalesForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sold: true }),
     };
-    const soldAuto = await fetch(url, fetchConfig);
+    try {
+      const soldAuto = await fetch(url, fetchConfig);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const fetchAutos = async () => {
     const url = "http://localhost:8100/api/automobiles/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      const filtered = data.autos.filter((auto) => {
-        return auto.sold === false;
-      });
-      setAutos(filtered);
-    } else {
-      console.error(response.status);
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        const filtered = data.autos.filter((auto) => {
+          return auto.sold === false;
+        });
+        setAutos(filtered);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
   const fetchSalespeople = async () => {
     const url = "http://localhost:8090/api/salespeople/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setSalespeople(data.salesperson);
-    } else {
-      console.error(response.status);
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setSalespeople(data.salesperson);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
   const fetchCustomers = async () => {
     const url = "http://localhost:8090/api/customers/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setCustomers(data.customers);
-    } else {
-      console.error(response.status);
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setCustomers(data.customers);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -85,17 +95,19 @@ function SalesForm() {
       },
     };
 
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      const newSale = await response.json();
-      handleSold(data.automobile);
-      setAuto("");
-      setSalesperson("");
-      setCustomer("");
-      setPrice("");
-      setSubmitted(true);
-    } else {
-      console.error(response.status);
+    try {
+      const response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        const newSale = await response.json();
+        handleSold(data.automobile);
+        setAuto("");
+        setSalesperson("");
+        setCustomer("");
+        setPrice("");
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

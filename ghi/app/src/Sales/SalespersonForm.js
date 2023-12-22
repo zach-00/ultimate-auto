@@ -23,16 +23,17 @@ function SalespersonForm() {
         "Content-Type": "application/json",
       },
     };
-
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      const newSalesperson = await response.json();
-      setFirstName("");
-      setLastName("");
-      setEmployeeId("");
-      setSubmitted(true);
-    } else {
-      console.error(response.status);
+    try {
+      const response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        const newSalesperson = await response.json();
+        setFirstName("");
+        setLastName("");
+        setEmployeeId("");
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

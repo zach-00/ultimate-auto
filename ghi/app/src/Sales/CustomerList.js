@@ -5,12 +5,14 @@ function CustomerList() {
 
   const getCustomers = async () => {
     const url = "http://localhost:8090/api/customers/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setCustomers(data.customers);
-    } else {
-      console.error("An error occured fetching the data");
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setCustomers(data.customers);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

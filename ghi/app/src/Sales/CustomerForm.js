@@ -71,19 +71,21 @@ function CustomerForm() {
       },
     };
 
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      const newCustomer = await response.json();
-      setFirstName("");
-      setLastName("");
-      setPhone("");
-      setStreet("");
-      setCity("");
-      setState("");
-      setZip("");
-      setSubmitted(true);
-    } else {
-      console.error(response.status);
+    try {
+      const response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        const newCustomer = await response.json();
+        setFirstName("");
+        setLastName("");
+        setPhone("");
+        setStreet("");
+        setCity("");
+        setState("");
+        setZip("");
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
