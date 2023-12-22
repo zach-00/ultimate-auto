@@ -48,9 +48,6 @@ function AutomobileForm() {
     fetchData();
   }, []);
 
-  const submittedMessage = submitted
-    ? "alert alert-success mb-0"
-    : "alert alert-success d-none mb-0";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
