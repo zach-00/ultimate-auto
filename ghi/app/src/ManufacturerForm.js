@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function ManufacturerForm(props) {
   const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
