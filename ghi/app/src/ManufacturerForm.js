@@ -36,6 +36,8 @@ function ManufacturerForm(props) {
     setName(value);
   }
 
+  const successMessage = !submitted ? "d-none" : "alert alert-success mb-0";
+
   return (
     <>
       <div className="container">

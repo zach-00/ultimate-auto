@@ -174,7 +174,7 @@ function CustomerForm() {
                   id="address_state"
                   className="form-control"
                 />
-                <label htmlFor="state">State</label>
+                <label htmlFor="state">State Abbreviation</label>
               </div>
               <div className="form-floating mb-3">
                 <input
