@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function ManufacturerForm(props) {
   const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,8 +35,6 @@ function ManufacturerForm(props) {
     const { value } = event.target;
     setName(value);
   }
-
-  const successMessage = !submitted ? "d-none" : "alert alert-success mb-0";
 
   return (
     <>
