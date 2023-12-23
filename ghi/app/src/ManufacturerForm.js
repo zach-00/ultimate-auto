@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function ManufacturerForm(props) {
   const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +26,7 @@ function ManufacturerForm(props) {
       const newManufacturer = await response.json();
 
       setName("");
+      setSubmitted(true);
     } else {
       console.log("An error occured fetching the data");
     }
@@ -34,6 +36,8 @@ function ManufacturerForm(props) {
     const { value } = event.target;
     setName(value);
   }
+
+  const successMessage = !submitted ? "d-none" : "alert alert-success mb-0";
 
   return (
     <>
@@ -49,13 +53,18 @@ function ManufacturerForm(props) {
                     placeholder="Manufacturer Name"
                     required
                     type="text"
+                    value={name}
                     name="name"
                     id="name"
                     className="form-control"
                   />
                   <label>Manufacturer Name</label>
                 </div>
-                <button className="btn btn-primary">Create</button>
+                <button className="btn btn-primary mb-3">Create</button>
+
+                <div className={successMessage}>
+                  Manufacturer successfully created!
+                </div>
               </form>
             </div>
           </div>
