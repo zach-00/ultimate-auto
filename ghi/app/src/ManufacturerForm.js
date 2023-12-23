@@ -24,7 +24,6 @@ function ManufacturerForm(props) {
 
     if (response.ok) {
       const newManufacturer = await response.json();
-
       setName("");
       setSubmitted(true);
     } else {
