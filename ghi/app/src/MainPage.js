@@ -26,7 +26,7 @@ function MainPage() {
         <div className="card">
           <img src="https://www.freedomwarranty.com/wp-content/uploads/Freedom-Warranty-LLC_-Extended-Service-Contract-A-Necessity-with-the-Rise-in-Auto-Repair-Cost_IMAGE1-1.jpeg" className="card-img-top" />
           <div className="card-body">
-            <h5 className="card-title">Service Appointment</h5>
+            <h5 className="card-title">Service Appointments</h5>
             <NavLink to="appointments/create/" className="btn btn-primary">Schedule Appointment</NavLink>
           </div>
         </div>
