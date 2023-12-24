@@ -6,7 +6,7 @@ function Nav() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          CarCar
+          UltimateAuto
         </NavLink>
         <button
           className="navbar-toggler"
